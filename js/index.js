@@ -1,3 +1,1 @@
-define([], function () {
-  return '"pagination-control" is an awesome library.';
-});
+export { PaginationView } from './pagination-view';
