@@ -26,6 +26,10 @@ function webpackBuild(configFilePath) {
   };
 }
 
+function resolveDependency(dep) {
+  return path.relative('.', require.resolve(dep)).replace(/\.js$/, '');
+}
+
 //
 // Don't use Karma API for now
 // For karma version 0.13.19 - 0.13.22, there's issue 1788
@@ -96,9 +100,13 @@ gulp.task('example:requirejs', function () {
       esprima.parse(
         'var require = ' + JSON.stringify({
           baseUrl: path.relative('examples/requirejs', '.'),
-          paths: _.defaults(_.mapValues(pkg.peerDependencies, function (value, key) {
-            return path.relative('.', require.resolve(key)).replace(/\.js$/, '');
-          }), { 'pagination-control': 'dist/pagination-control' }),
+          paths: _.defaults(
+            _.mapValues(pkg.peerDependencies, function (value, key) {
+              return resolveDependency(key);
+            }),
+            _.mapValues({ jade: 'require-jade' }, resolveDependency),
+            { 'pagination-control': 'dist/pagination-control' }
+          ),
         }) + ';'
       ),
       _.set({}, 'format.indent.style', '  ')

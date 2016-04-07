@@ -1,10 +1,9 @@
 import _ from 'underscore';
-import Backbone from 'backbone';
-import ko from 'knockout';
+import KnockoutView from './knockout-view';
 import tmpl from '../template/layout/simple.jade';
 import PaginationViewModel from './pagination-view-model';
 
-export class PaginationView extends Backbone.View {
+export class PaginationView extends KnockoutView {
 
   initialize({
     // for view model
@@ -13,16 +12,21 @@ export class PaginationView extends Backbone.View {
     itemCount = 0,
     availablePageSizes = [20, 50, 100, 200],
 
-    customViewModel = {},
+    viewModelDecorator = _.identity,
     template = tmpl,
   }) {
-    this.template = template;
-    this.viewModel = _.extend(new PaginationViewModel({
-      pageSize,
-      pageNumber,
-      itemCount,
-      availablePageSizes,
-    }), customViewModel);
+    super.initialize({
+      state: {
+        pageSize,
+        pageNumber,
+        itemCount,
+        availablePageSizes,
+      },
+      template,
+      ViewModel: PaginationViewModel,
+    });
+
+    viewModelDecorator(this.viewModel);
 
     this.viewModel.pageSize.subscribe(
       pageSize => this.trigger('change:page-size', pageSize)
@@ -65,17 +69,6 @@ export class PaginationView extends Backbone.View {
 
   set availablePageSizes(availablePageSizes) {
     this.viewModel.availablePageSizes(availablePageSizes);
-  }
-
-  render() {
-    this.el.innerHTML = this.template();
-    ko.applyBindings(this.viewModel, this.el);
-    return this;
-  }
-
-  remove() {
-    ko.cleanNode(this.el);
-    super.remove();
   }
 
 }
