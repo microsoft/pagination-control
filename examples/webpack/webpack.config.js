@@ -1,4 +1,3 @@
-var url = require('url');
 var path = require('path');
 var webpack = require('webpack');
 
@@ -8,13 +7,10 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     filename: 'pagination-control-example.js',
     devtoolModuleFilenameTemplate: function (info) {
-      var comps = url.parse(info.absoluteResourcePath);
-
-      if (comps.protocol) {
-        return info.absoluteResourcePath;
+      if (path.isAbsolute(info.absoluteResourcePath)) {
+        return 'webpack-src:///pagination-control-example/' + path.relative('.', info.absoluteResourcePath);
       }
-
-      return 'webpack-src:///pagination-control-example/' + path.relative('.', info.absoluteResourcePath);
+      return info.absoluteResourcePath;
     },
   },
   module: {
