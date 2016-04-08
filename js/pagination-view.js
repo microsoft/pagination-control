@@ -1,6 +1,6 @@
 import _ from 'underscore';
 import KnockoutView from './knockout-view';
-import tmpl from '../template/layout/simple.jade';
+import tmpl from '../template/layout/default.jade';
 import PaginationViewModel from './pagination-view-model';
 
 export class PaginationView extends KnockoutView {
@@ -11,6 +11,8 @@ export class PaginationView extends KnockoutView {
     pageNumber = 0,
     itemCount = 0,
     availablePageSizes = [20, 50, 100, 200],
+    pageSizeText = 'Page size: ',
+    totalPageCountText = 'of ',
 
     viewModelDecorator = _.identity,
     template = tmpl,
@@ -24,6 +26,10 @@ export class PaginationView extends KnockoutView {
       },
       template,
       ViewModel: PaginationViewModel,
+      config: {
+        pageSizeText,
+        totalPageCountText,
+      },
     });
 
     viewModelDecorator(this.viewModel);
@@ -31,7 +37,7 @@ export class PaginationView extends KnockoutView {
     this.viewModel.pageSize.subscribe(
       pageSize => this.trigger('change:page-size', pageSize)
     );
-    this.viewModel.pageSize.subscribe(
+    this.viewModel.pageNumber.subscribe(
       pageNumber => this.trigger('change:page-number', pageNumber)
     );
     this.viewModel.itemCount.subscribe(

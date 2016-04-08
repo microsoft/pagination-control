@@ -42,6 +42,10 @@ export default class {
         write: n => n > 0 && n <= this.pageCount() && this.pageNumber(n - 1),
       }),
     });
+
+    _.extend(this, {
+      pageNumberSize: ko.computed(() => Math.floor(Math.log10(this.pageCount())) + 1),
+    });
   }
 
   incPageNumber() {

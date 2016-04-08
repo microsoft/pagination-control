@@ -1,0 +1,14 @@
+form.form-inline
+  span=pageSizeText
+  select.form-control(data-bind='options: availablePageSizes, selectedOptions: pageSize')
+  .input-group
+    span.input-group-btn
+      button.btn.btn-default(data-bind='click: decPageNumber', type='button')
+        .glyphicon.glyphicon-triangle-left
+    input.form-control(data-bind='value: inputPageNumber, attr: { size: pageNumberSize, maxlength: pageNumberSize }', type='text', pattern='[1-9]\d*')
+    span.input-group-addon
+      span=totalPageCountText
+      span(data-bind='text: pageCount')
+    .input-group-btn
+      button.btn.btn-default(data-bind='click: incPageNumber', type='button')
+        .span.glyphicon.glyphicon-triangle-right

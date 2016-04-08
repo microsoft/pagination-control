@@ -14,24 +14,9 @@ export default class KnockoutView extends Backbone.View {
     this.config = config;
   }
 
-  template() {
-    return this.template;
-  }
-
-  viewModel() {
-    return this.viewModel;
-  }
-
-  config() {
-    return this.config;
-  }
-
   render() {
-    const template = this.template();
-    const config = this.config();
-
-    this.el.innerHTML = template(config);
-    ko.applyBindings(this.viewModel(), this.el);
+    this.el.innerHTML = this.template(this.config);
+    ko.applyBindings(this.viewModel, this.el);
 
     return this;
   }
