@@ -45,12 +45,12 @@ module.exports = {
         test: /\.(js|es6?)$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        query: { presets: ['es2015'] },
       },
       // es2015-end
       // react
     ],
   },
+  babel: { presets: ['es2015'] },
   externals: [getExternals()],
   resolve: { alias: webpackAlias },
   devtool: 'source-map',

@@ -1,7 +1,10 @@
-var expect = require('chai').expect;
+import chai from 'chai';
+import { PaginationView } from '../js/index';
 
-describe('pagination-control', function () {
-  it('should have test cases', function () {
-    expect.fail();
+const expect = chai.expect;
+
+describe('pagination-view', function () {
+  it('should be defined as a class', function () {
+    expect(PaginationView).to.be.a('function');
   });
 });

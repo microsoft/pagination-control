@@ -5,7 +5,7 @@ form.form-inline
     span.input-group-btn
       button.btn.btn-default(data-bind='click: decPageNumber', type='button')
         .glyphicon.glyphicon-triangle-left
-    input.form-control(data-bind='value: inputPageNumber, attr: { size: pageNumberSize, maxlength: pageNumberSize }', type='text', pattern='[1-9]\d*')
+    input.form-control(data-bind='value: pageNumberText, attr: { size: pageNumberSize, maxlength: pageNumberSize }', type='text')
     span.input-group-addon
       span=totalPageCountText
       span(data-bind='text: pageCount')

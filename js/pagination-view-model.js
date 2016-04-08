@@ -13,55 +13,38 @@ export default class {
 
     // All numbers / calculations in this model are
     // base 0; so page 0 is the first page
-    _.extend(this, {
-      pageNumber: ko.observable(pageNumber),
-      pageSize: ko.observable(pageSize),
-      itemCount: ko.observable(itemCount),
-      availablePageSizes: ko.observableArray(availablePageSizes),
-    });
+    this.pageSize = ko.observable(pageSize);
+    this.itemCount = ko.observable(itemCount);
+    this.pageNumber = ko.observable(pageNumber);
+    this.availablePageSizes = ko.observableArray(availablePageSizes);
 
-    _.extend(this, {
-      pageCount: ko.computed(() => Math.ceil(this.itemCount() / this.pageSize())),
-      skip: ko.computed(() => this.pageNumber() * this.pageSize()),
-      take: ko.computed(() => this.pageSize()),
+    this.pageCount = ko.computed(() => Math.ceil(this.itemCount() / this.pageSize()));
+    this.pageNumberInput = ko.computed({
+      read: () => this.pageNumber(),
+      write: value => this.pageNumber(Math.min(Math.max(value, 0), this.pageCount() - 1)),
     });
+    this.pageNumberText = ko.computed({
+      read: () => (this.pageNumberInput() + 1).toString(),
+      write: value => {
+        console.log(value);
+        this.pageNumberInput(Number.parseInt(value, 10) - 1);
+      },
+    }).extend({ notify: 'always' });
 
-    _.extend(this, {
-      itemFrom: ko.computed(() => this.skip() + 1),
-      itemTo: ko.computed(() => Math.min(this.itemCount(), this.skip() + this.take())),
-    });
+    this.pageNumberSize = ko.computed(() => Math.floor(Math.log10(this.pageCount())) + 1);
 
-    _.extend(this, {
-      pageCountBefore: ko.computed(() => this.pageNumber()),
-      pageCountAfter: ko.computed(() => this.pageCount() - this.pageNumber() - 1),
-    });
+    this.skip = ko.computed(() => this.pageNumber() * this.pageSize());
+    this.take = ko.computed(() => this.pageSize());
 
-    _.extend(this, {
-      inputPageNumber: ko.computed({
-        read: () => this.pageNumber() + 1,
-        write: n => n > 0 && n <= this.pageCount() && this.pageNumber(n - 1),
-      }),
-    });
-
-    _.extend(this, {
-      pageNumberSize: ko.computed(() => Math.floor(Math.log10(this.pageCount())) + 1),
-    });
+    // initialize the
   }
 
   incPageNumber() {
-    const pageNumber = this.pageNumber();
-
-    if (pageNumber + 1 < this.pageCount()) {
-      this.pageNumber(pageNumber + 1);
-    }
+    this.pageNumberInput(this.pageNumber() + 1);
   }
 
   decPageNumber() {
-    const pageNumber = this.pageNumber();
-
-    if (pageNumber > 0) {
-      this.pageNumber(pageNumber - 1);
-    }
+    this.pageNumberInput(this.pageNumber() - 1);
   }
 
   validate({ pageNumber, pageSize, itemCount, availablePageSizes }) {

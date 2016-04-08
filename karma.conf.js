@@ -9,7 +9,7 @@ function getWebpackConfig() {
     {
       test: /\.js$/,
       include: path.resolve('./js/'),
-      loader: 'istanbul-instrumenter',
+      loader: 'isparta',
     },
   ].concat(webpackConfig.module.preLoaders || []);
 
@@ -19,7 +19,7 @@ function getWebpackConfig() {
 module.exports = function (config) {
   config.set({
     files: [
-      'spec/$speclist.js',
+      'speclist.js',
     ],
 
     frameworks: [
@@ -35,7 +35,7 @@ module.exports = function (config) {
     reporters: ['mocha', 'coverage'],
 
     preprocessors: {
-      'spec/$speclist.js': ['webpack'],
+      'speclist.js': ['webpack'],
     },
 
     webpack: getWebpackConfig(),
