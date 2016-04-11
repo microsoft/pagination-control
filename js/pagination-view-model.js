@@ -18,24 +18,41 @@ export default class {
     this.pageNumber = ko.observable(pageNumber);
     this.availablePageSizes = ko.observableArray(availablePageSizes);
 
+    this.pageSizeInput = ko.computed({
+      read: () => this.pageSize(),
+      write: value => {
+        if (Number.isInteger(value)) {
+          this.pageSize(value);
+          this.pageNumberInput(this.pageNumber());
+        }
+      }
+    });
+
     this.pageCount = ko.computed(() => Math.ceil(this.itemCount() / this.pageSize()));
     this.pageNumberInput = ko.computed({
       read: () => this.pageNumber(),
-      write: value => this.pageNumber(Math.min(Math.max(value, 0), this.pageCount() - 1)),
+      write: value => {
+        if (Number.isInteger(value)) {
+          this.pageNumber(Math.min(Math.max(value, 0), this.pageCount() - 1));
+        }
+      }
     });
     this.pageNumberText = ko.computed({
       read: () => (this.pageNumberInput() + 1).toString(),
       write: value => {
-        console.log(value);
-        this.pageNumberInput(Number.parseInt(value, 10) - 1);
+        const intValue = Number.parseInt(value, 10) - 1;
+        if (Number.isInteger(intValue)) {
+          this.pageNumberInput(intValue);
+        } else {
+          this.pageNumberInput.notifySubscribers();
+          this.pageNumberText.notifySubscribers();
+        }
       },
-    }).extend({ notify: 'always' });
-
+    });
     this.pageNumberSize = ko.computed(() => Math.floor(Math.log10(this.pageCount())) + 1);
 
     this.skip = ko.computed(() => this.pageNumber() * this.pageSize());
     this.take = ko.computed(() => this.pageSize());
-
     // initialize the
   }
 
