@@ -77,7 +77,7 @@ export default class {
       throw new Error(`invalid itemCount ${itemCount}`);
     }
 
-    if (pageNumber * pageSize >= itemCount) {
+    if (pageNumber * pageSize >= itemCount || pageNumber === 0) {
       throw new Error(`pageNumber ${pageNumber} out of range`);
     }
 
