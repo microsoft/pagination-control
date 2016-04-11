@@ -710,7 +710,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        throw new Error('invalid itemCount ' + itemCount);
 	      }
 	
-	      if (pageNumber * pageSize >= itemCount || pageNumber === 0) {
+	      if (pageNumber > 0 && pageNumber * pageSize >= itemCount) {
 	        throw new Error('pageNumber ' + pageNumber + ' out of range');
 	      }
 	
