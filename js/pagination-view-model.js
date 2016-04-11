@@ -25,7 +25,7 @@ export default class {
           this.pageSize(value);
           this.pageNumberInput(this.pageNumber());
         }
-      }
+      },
     });
 
     this.pageCount = ko.computed(() => Math.ceil(this.itemCount() / this.pageSize()));
@@ -35,7 +35,7 @@ export default class {
         if (Number.isInteger(value)) {
           this.pageNumber(Math.min(Math.max(value, 0), this.pageCount() - 1));
         }
-      }
+      },
     });
     this.pageNumberText = ko.computed({
       read: () => (this.pageNumberInput() + 1).toString(),
@@ -77,7 +77,7 @@ export default class {
       throw new Error(`invalid itemCount ${itemCount}`);
     }
 
-    if (pageNumber * pageSize >= itemCount) {
+    if (pageNumber > 0 && pageNumber * pageSize >= itemCount) {
       throw new Error(`pageNumber ${pageNumber} out of range`);
     }
 
