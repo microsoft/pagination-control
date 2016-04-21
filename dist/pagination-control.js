@@ -201,7 +201,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.viewModel.availablePageSizes(availablePageSizes);
 	    }
 	  }]);
-	
+
 	  return PaginationView;
 	}(_knockoutView2.default);
 
@@ -603,8 +603,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
+	function isInteger(n) {
+	  return n === parseInt(n, 10);
+	}
+	
 	function isFiniteInteger(n) {
-	  return Number.isFinite(n) && Number.isInteger(n);
+	  return isFinite(n) && isInteger(n);
 	}
 	
 	var _class = function () {
@@ -659,7 +663,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      },
 	      write: function write(value) {
 	        var intValue = Number.parseInt(value, 10) - 1;
-	        if (Number.isInteger(intValue)) {
+	        if (isInteger(intValue)) {
 	          _this.pageNumberInput(intValue);
 	        } else {
 	          _this.pageNumberInput.notifySubscribers();
