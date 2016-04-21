@@ -1,8 +1,12 @@
 import _ from 'underscore';
 import ko from 'knockout';
 
+function isInteger(n) {
+  return n === parseInt(n, 10);
+}
+
 function isFiniteInteger(n) {
-  return Number.isFinite(n) && Number.isInteger(n);
+  return isFinite(n) && isInteger(n);
 }
 
 export default class {
@@ -41,7 +45,7 @@ export default class {
       read: () => (this.pageNumberInput() + 1).toString(),
       write: value => {
         const intValue = Number.parseInt(value, 10) - 1;
-        if (Number.isInteger(intValue)) {
+        if (isInteger(intValue)) {
           this.pageNumberInput(intValue);
         } else {
           this.pageNumberInput.notifySubscribers();
