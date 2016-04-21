@@ -2,7 +2,7 @@ import _ from 'underscore';
 import ko from 'knockout';
 
 function isInteger(n) {
-  return n === parseInt(n);
+  return n === parseInt(n, 10);
 }
 
 function isFiniteInteger(n) {
