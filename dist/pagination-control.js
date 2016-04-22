@@ -672,7 +672,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    });
 	    this.pageNumberSize = _knockout2.default.computed(function () {
-	      return Math.floor(Math.log10(_this.pageCount())) + 1;
+	      return Math.floor(_this.pageCount().toString().length);
 	    });
 	
 	    this.skip = _knockout2.default.computed(function () {
