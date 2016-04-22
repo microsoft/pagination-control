@@ -53,7 +53,7 @@ export default class {
         }
       },
     });
-    this.pageNumberSize = ko.computed(() => Math.floor(Math.log10(this.pageCount())) + 1);
+    this.pageNumberSize = ko.computed(() => Math.floor(this.pageCount().toString().length));
 
     this.skip = ko.computed(() => this.pageNumber() * this.pageSize());
     this.take = ko.computed(() => this.pageSize());
