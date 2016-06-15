@@ -603,6 +603,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
+	var parseInt = Number.parseInt || window.parseInt;
+	
 	function isInteger(n) {
 	  return n === parseInt(n, 10);
 	}
@@ -637,7 +639,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return _this.pageSize();
 	      },
 	      write: function write(value) {
-	        if (Number.isInteger(value)) {
+	        if (isInteger(value)) {
 	          _this.pageSize(value);
 	          _this.pageNumberInput(_this.pageNumber());
 	        }
@@ -652,7 +654,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return _this.pageNumber();
 	      },
 	      write: function write(value) {
-	        if (Number.isInteger(value)) {
+	        if (isInteger(value)) {
 	          _this.pageNumber(Math.min(Math.max(value, 0), _this.pageCount() - 1));
 	        }
 	      }
@@ -662,7 +664,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return (_this.pageNumberInput() + 1).toString();
 	      },
 	      write: function write(value) {
-	        var intValue = Number.parseInt(value, 10) - 1;
+	        var intValue = parseInt(value, 10) - 1;
 	        if (isInteger(intValue)) {
 	          _this.pageNumberInput(intValue);
 	        } else {
