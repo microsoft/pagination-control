@@ -1,6 +1,8 @@
 import _ from 'underscore';
 import ko from 'knockout';
 
+const parseInt = Number.parseInt || window.parseInt;
+
 function isInteger(n) {
   return n === parseInt(n, 10);
 }
@@ -25,7 +27,7 @@ export default class {
     this.pageSizeInput = ko.computed({
       read: () => this.pageSize(),
       write: value => {
-        if (Number.isInteger(value)) {
+        if (isInteger(value)) {
           this.pageSize(value);
           this.pageNumberInput(this.pageNumber());
         }
@@ -36,7 +38,7 @@ export default class {
     this.pageNumberInput = ko.computed({
       read: () => this.pageNumber(),
       write: value => {
-        if (Number.isInteger(value)) {
+        if (isInteger(value)) {
           this.pageNumber(Math.min(Math.max(value, 0), this.pageCount() - 1));
         }
       },
@@ -44,7 +46,7 @@ export default class {
     this.pageNumberText = ko.computed({
       read: () => (this.pageNumberInput() + 1).toString(),
       write: value => {
-        const intValue = Number.parseInt(value, 10) - 1;
+        const intValue = parseInt(value, 10) - 1;
         if (isInteger(intValue)) {
           this.pageNumberInput(intValue);
         } else {
