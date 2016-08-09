@@ -22,7 +22,7 @@ export default class KnockoutView extends Backbone.View {
   }
 
   remove() {
-    ko.clearNode(this.el);
+    ko.cleanNode(this.el);
     super.remove();
   }
 
