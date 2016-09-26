@@ -30,7 +30,7 @@ module.exports = {
     umdNamedDefine: false,
     devtoolModuleFilenameTemplate: function (info) {
       if (path.isAbsolute(info.absoluteResourcePath)) {
-        return 'webpack-src:///pagination-control-example/' + path.relative('.', info.absoluteResourcePath);
+        return 'webpack-src:///pagination-control-example/' + path.relative('.', info.absoluteResourcePath).replace(/\\/g, '/');
       }
       return info.absoluteResourcePath;
     },
@@ -47,11 +47,11 @@ module.exports = {
         loader: 'babel-loader',
       },
       // es2015-end
-      // react
+      { test: /\.js$/, loader: 'source-map-loader' },
     ],
   },
   babel: { presets: ['es2015'] },
   externals: [getExternals()],
   resolve: { alias: webpackAlias },
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
 };

@@ -8,15 +8,10 @@ module.exports = {
     filename: 'pagination-control-example.js',
     devtoolModuleFilenameTemplate: function (info) {
       if (path.isAbsolute(info.absoluteResourcePath)) {
-        return 'webpack-src:///pagination-control-example/' + path.relative('.', info.absoluteResourcePath);
+        return 'webpack-src:///pagination-control-example/' + path.relative('.', info.absoluteResourcePath).replace(/\\/g, '/');
       }
       return info.absoluteResourcePath;
     },
-  },
-  module: {
-    preLoaders: [
-      { test: /\.js$/, loader: "source-map-loader" },
-    ],
   },
   resolve: {
     alias: {
@@ -26,5 +21,5 @@ module.exports = {
   plugins: [
     new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
   ],
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
 };
