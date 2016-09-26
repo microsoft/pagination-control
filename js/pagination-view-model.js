@@ -39,7 +39,7 @@ export default class {
       read: () => this.pageNumber(),
       write: value => {
         if (isInteger(value)) {
-          this.pageNumber(Math.min(Math.max(value, 0), this.pageCount() - 1));
+          this.pageNumber(Math.max(Math.min(value, this.pageCount() - 1), 0));
         }
       },
     });
