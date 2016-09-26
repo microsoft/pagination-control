@@ -54,7 +54,7 @@ export class PaginationView extends KnockoutView {
   }
 
   get itemCount() {
-    return this.itemCount();
+    return this.viewModel.itemCount();
   }
 
   set itemCount(itemCount) {
