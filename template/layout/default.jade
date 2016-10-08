@@ -1,6 +1,6 @@
 form.form-inline
   span=pageSizeText
-  select.form-control(data-bind='options: availablePageSizes, value: pageSizeInput')
+  select.form-control(data-bind='options: availablePageSizes, value: pageSizeInput', aria-label=pageSizeText)
   .input-group
     span.input-group-btn
       button.btn.btn-default(data-bind='click: decPageNumber', type='button')
