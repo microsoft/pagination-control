@@ -13,6 +13,8 @@ export class PaginationView extends KnockoutView {
     availablePageSizes = [20, 50, 100, 200],
     pageSizeText = 'Page size: ',
     totalPageCountText = 'of ',
+    previousPageText = 'Previous Page',
+    nextPageText = 'Next Page',
 
     viewModelDecorator = _.identity,
     template = tmpl,
@@ -29,6 +31,8 @@ export class PaginationView extends KnockoutView {
       config: {
         pageSizeText,
         totalPageCountText,
+        previousPageText,
+        nextPageText,
       },
     });
 
