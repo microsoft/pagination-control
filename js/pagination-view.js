@@ -15,6 +15,7 @@ export class PaginationView extends KnockoutView {
     totalPageCountText = 'of ',
     previousPageText = 'Previous Page',
     nextPageText = 'Next Page',
+    disableFanout = false,
 
     viewModelDecorator = _.identity,
     template = tmpl,
@@ -25,6 +26,7 @@ export class PaginationView extends KnockoutView {
         pageNumber,
         itemCount,
         availablePageSizes,
+        disableFanout,
       },
       template,
       ViewModel: PaginationViewModel,
@@ -81,4 +83,11 @@ export class PaginationView extends KnockoutView {
     this.viewModel.availablePageSizes(availablePageSizes);
   }
 
+  get disableFanout() {
+    return this.viewModel.disableFanout();
+  }
+
+  set disableFanout(disableFanout) {
+    return this.viewModel.disableFanout(disableFanout);
+  }
 }
