@@ -15,7 +15,7 @@ export class PaginationView extends KnockoutView {
     totalPageCountText = 'of ',
     previousPageText = 'Previous Page',
     nextPageText = 'Next Page',
-    disableFanout = false,
+    enableRandomPage = true,
 
     viewModelDecorator = _.identity,
     template = tmpl,
@@ -26,7 +26,7 @@ export class PaginationView extends KnockoutView {
         pageNumber,
         itemCount,
         availablePageSizes,
-        disableFanout,
+        enableRandomPage,
       },
       template,
       ViewModel: PaginationViewModel,
@@ -83,11 +83,11 @@ export class PaginationView extends KnockoutView {
     this.viewModel.availablePageSizes(availablePageSizes);
   }
 
-  get disableFanout() {
-    return this.viewModel.disableFanout();
+  get enableRandomPage() {
+    return this.viewModel.enableRandomPage();
   }
 
-  set disableFanout(disableFanout) {
-    return this.viewModel.disableFanout(disableFanout);
+  set enableRandomPage(enableRandomPage) {
+    return this.viewModel.enableRandomPage(enableRandomPage);
   }
 }

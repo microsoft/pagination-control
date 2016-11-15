@@ -13,7 +13,7 @@ function isFiniteInteger(n) {
 
 export default class {
   constructor(options) {
-    const { pageNumber, pageSize, itemCount, availablePageSizes, disableFanout} = options;
+    const { pageNumber, pageSize, itemCount, availablePageSizes, enableRandomPage} = options;
 
     this.validate(options);
 
@@ -23,7 +23,7 @@ export default class {
     this.itemCount = ko.observable(itemCount);
     this.pageNumber = ko.observable(pageNumber);
     this.availablePageSizes = ko.observableArray(availablePageSizes);
-    this.disableFanout = ko.observable(disableFanout);
+    this.enableRandomPage = ko.observable(enableRandomPage);
 
     this.pageSizeInput = ko.computed({
       read: () => this.pageSize(),

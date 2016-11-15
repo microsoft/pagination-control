@@ -5,7 +5,7 @@ form.form-inline
     span.input-group-btn
       button.btn.btn-default(data-bind='click: decPageNumber', type='button', aria-label=previousPageText)
         .glyphicon.glyphicon-triangle-left
-    input.form-control(data-bind='value: pageNumberText, attr: { size: pageNumberSize, maxlength: pageNumberSize, disabled: disableFanout}', type='text')
+    input.form-control(data-bind='value: pageNumberText, attr: { size: pageNumberSize, maxlength: pageNumberSize, disabled: !enableRandomPage()}', type='text')
     span.input-group-addon
       span=totalPageCountText
       span(data-bind='text: pageCount')
