@@ -51,6 +51,12 @@ export class PaginationView extends KnockoutView {
     );
   }
 
+  get events() {
+    return {
+      sumbmit: () => false,
+    };
+  }
+
   get pageSize() {
     return this.viewModel.pageSize();
   }
