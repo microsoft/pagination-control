@@ -13,7 +13,7 @@ function isFiniteInteger(n) {
 
 export default class {
   constructor(options) {
-    const { pageNumber, pageSize, itemCount, availablePageSizes, enableRandomPage} = options;
+    const { pageNumber, pageSize, itemCount, availablePageSizes, enableRandomPage } = options;
 
     this.validate(options);
 
