@@ -13,7 +13,7 @@ function isFiniteInteger(n) {
 
 export default class {
   constructor(options) {
-    const { pageNumber, pageSize, itemCount, availablePageSizes, enableRandomPage } = options;
+    const { pageNumber, pageSize, itemCount, availablePageSizes, enableRandomPage, getItemRangeText } = options;
 
     this.validate(options);
 
@@ -60,7 +60,13 @@ export default class {
 
     this.skip = ko.computed(() => this.pageNumber() * this.pageSize());
     this.take = ko.computed(() => this.pageSize());
-    // initialize the
+    this.itemRangeText = ko.computed(() => {
+      return getItemRangeText({
+        from: this.skip() + 1,
+        to: Math.min(this.skip() + this.take(), this.itemCount()),
+        total: this.itemCount(),
+      });
+    });
   }
 
   incPageNumber() {

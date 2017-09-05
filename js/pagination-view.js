@@ -19,6 +19,7 @@ export class PaginationView extends KnockoutView {
 
     viewModelDecorator = _.identity,
     template = tmpl,
+    getItemRangeText = _.noop,
   }) {
     super.initialize({
       state: {
@@ -27,6 +28,7 @@ export class PaginationView extends KnockoutView {
         itemCount,
         availablePageSizes,
         enableRandomPage,
+        getItemRangeText,
       },
       template,
       ViewModel: PaginationViewModel,
