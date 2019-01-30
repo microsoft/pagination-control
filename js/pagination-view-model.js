@@ -58,6 +58,17 @@ export default class {
     });
     this.pageNumberSize = ko.computed(() => Math.floor(this.pageCount().toString().length));
 
+    this.onKeyPress = (data, event) => {
+      const keyCode = event.which || event.keyCode;
+
+      if (keyCode === 13) {
+        event.target.blur();
+        return false;
+      }
+
+      return true;
+    };
+
     this.skip = ko.computed(() => this.pageNumber() * this.pageSize());
     this.take = ko.computed(() => this.pageSize());
     // initialize the
